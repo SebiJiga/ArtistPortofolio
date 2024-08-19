@@ -21,7 +21,10 @@ export class WorksService {
       }
     
       create(createWorkDto: any) {
-        const newWork = { id: Date.now().toString(), ...createWorkDto };
+        const lastWork = this.works.length > 0 ? this.works[this.works.length - 1] : null;
+        const newId = lastWork ? (parseInt(lastWork.id) + 1).toString() :'1';
+
+        const newWork = { id: newId, ...createWorkDto };
         this.works.push(newWork);
         return newWork;
       }
